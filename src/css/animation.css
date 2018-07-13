@@ -1,0 +1,40 @@
+.take-out-enter {
+  transform: translateY(0);
+}
+.take-out-enter-active {
+  transform: translateY(100px);
+  transition: all 500ms;
+}
+.take-out-enter-done {
+	transform: translateY(100px);
+}
+.take-out-exit {
+	transform: translateY(100px);	
+}
+.move-enter {
+	transform: translateX(0);
+}
+.move-enter-active {
+	transform: translateX(40px);
+  transition: all 500ms;	
+}
+.move-enter-done {
+	transform: translateX(40px);
+}
+
+/*MergeSort*/
+
+
+.block {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 13px;
+}
+
+.animation-ul {
+	padding: 0; 
+	margin: 0; 
+	list-style-type: 'none';
+}
