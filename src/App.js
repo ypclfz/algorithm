@@ -37,7 +37,7 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React</h1>
           </header>
-          <div style={{ marginTop: 10 }}>
+          <div style={{ marginTop: 10, padding: '0 20px' }}>
             <div style={{ position: 'absolute' }}>
               <Nav/>
             </div>

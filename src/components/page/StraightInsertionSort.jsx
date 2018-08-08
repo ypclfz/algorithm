@@ -1,3 +1,8 @@
+/*
+直接插入排序
+
+动画的实现尝试使用了react-transition-group，但是感觉并不适用于当前使用场景，过于繁琐了
+*/
 import React from 'react'
 import SortCommon from '../common/SortCommon'
 import '../../css/animation.css'
@@ -19,12 +24,6 @@ class StraightInsertionSort extends React.Component {
       moveControl: {},
       count: 0
     }
-  }
-
-  delayMethod (time) {
-    return new Promise((resolve) => {
-      window.setTimeout(resolve, time)
-    })
   }
 
   straightInsertionSort = (arrSrc) => {
@@ -54,7 +53,7 @@ class StraightInsertionSort extends React.Component {
       arr,
       moveControl
     })
-    this.delayMethod(1000).then(() => {
+    this.$tool.delayMethod(1000).then(() => {
       this.selectItem(1)
     })   
   }
@@ -67,7 +66,7 @@ class StraightInsertionSort extends React.Component {
         keyIndex,
         compareIndex: keyIndex - 1
       })
-      this.delayMethod(100).then(() => {
+      this.$tool.delayMethod(100).then(() => {
         this.setState({
           backControl: true
         })
@@ -101,7 +100,7 @@ class StraightInsertionSort extends React.Component {
     this.setState({
       compareIndex: this.state.compareIndex - 1
     })
-    this.delayMethod(100).then(() => {
+    this.$tool.delayMethod(100).then(() => {
       this.insertItem()
     })
   }
@@ -129,7 +128,7 @@ class StraightInsertionSort extends React.Component {
       moveControl,
       count: this.state.count + 1
     })    
-    this.delayMethod(100).then(() => {
+    this.$tool.delayMethod(100).then(() => {
       this.selectItem()
     })   
   }
