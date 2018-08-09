@@ -7,7 +7,7 @@ import React from 'react'
 import SortCommon from '../common/SortCommon'
 import Block from '../../common/Block'
 let endAnimation = null
-let animationTime = 1
+let animationTime = 0.3
 class QuickSort extends React.Component {
   
   constructor(props) {
@@ -53,68 +53,98 @@ class QuickSort extends React.Component {
   }
 
   quickSortAnimation = async (arrSrc, end) => {
-    const arr = arrSrc.map((number, index) => new Block({number, index, animationTime}))
-    arr.forEach((item, index) => {
-      if (index - 1 > -1) {
-        item.beFore = arr[index - 1]
-      }
-      if (index + 1 < arr.length) {
-        
-      }
-    })
+    let arr = arrSrc.map((number, index) => new Block({number, index, animationTime}))
     endAnimation = end
 
     // 构建基础布局
     this.setState({ arr })
 
-    // 一秒后执行模拟快速排位
+    // 一秒后执行模拟快速排位动画
     await this.$tool.delayMethod(1000)
+    await this.quickSortAnimationRec(0, arr.length - 1, arr)
+    arr.forEach(item => {item.clear()})
+    this.setState({arr})
+    end()
+  }
+
+  async quickSortAnimationRec (start, end, arr) {
+    if (start < end) {
+      const middle = await this.partitionAnimation(start, end, arr)
+      arr[middle + 1].backgroundColor = 'red'
+      this.setState({arr})
+      await this.quickSortAnimationRec(start, middle, arr)
+      await this.quickSortAnimationRec(middle + 2, end, arr)
+    }
+  }
+
+  async partitionAnimation (start, end, arr) {
+    const time = animationTime * 1000
+    
+    // 选择区域
+    for (let i = start; i < end; i++) {
+      arr[i].borderColor = 'blue'
+    }
+
     // 选取最后一位
-    const temp = arr[arr.length - 1]
+    const temp = arr[end]
     temp.borderColor = 'red'
     temp.y = 80
+    temp.flag = 'middle'
     this.setState({ arr })
-
-    await this.$tool.delayMethod(animationTime * 1000)
-
-    let chooseIndex = -1
-    for (let i = 0; i < arr.length - 1; i++) {
+    await this.$tool.delayMethod(time)
+    // 依次比较大小
+    let chooseIndex = start - 1
+    for (let i = start; i < end; i++) {
       const choose = arr[i]
       choose.borderColor = 'green'
       choose.y = 80
       this.setState({ arr })
-      await this.$tool.delayMethod(animationTime * 1000)
+      await this.$tool.delayMethod(time)
       if (choose['number'] <= temp['number']) {
         choose.x = -40 * (i - chooseIndex)
-        choose.y = 0
+        choose.y = 40
+        choose.flag = 'left'
+        for (let j = start; j < i; j ++) {
+          if (arr[j].flag === 'right') {
+            arr[j].x += 40
+          }
+        }
         chooseIndex++
       } else {
-        choose.y = 0
+        choose.y = 40
+        choose.flag = 'right'
       }
       this.setState({ arr })
-      await this.$tool.delayMethod(animationTime * 1000)
+      await this.$tool.delayMethod(time)
     }
-    
-      
-      
-
-    // let chooseIndex = 0
-    // const choose = arr[i]
-    // choose.borderColor = 'green'
-    // choose.transitionFlag = true
-    // choose.transform = 'translateY(80px)'
-    // this.delayMethod(animationTime * 1000).then(() => {
-    //   if(choose['number'] <= arr[i]['number']) {
-    //     choose.transitionFlag = true
-    //     choose.transform = 'translateX(-40px)'
-    //   } else {
-    //     choose.transform
-    //   }
-    // })
-    
-    
-    
+    temp.x = (end - chooseIndex) * (-40)
+    temp.y = 40
+    this.setState({ arr })
+    await this.$tool.delayMethod(time)
+    temp.borderColor = 'green'
+    for (let i = start; i < end + 1; i++) {
+      arr[i].x += 40
+      arr[i].y = 0
+    }
+    this.setState({ arr })
+    await this.$tool.delayMethod(time)
+    // 调整数组顺序
+    let obj = {
+      'left': [],
+      'middle': [],
+      'right': []
+    }
+    for (let i = start; i < end + 1; i++) {
+      const item = arr[i]
+      obj[item.flag].push(item)
+      item.clear()
+    }
+    arr.splice(start, (end - start + 1), ...obj['left'], ...obj['middle'], ...obj['right'])
+    this.setState({ arr })
+    await this.$tool.delayMethod(100)
+    return chooseIndex
   }
+
 
   render () {
     return (

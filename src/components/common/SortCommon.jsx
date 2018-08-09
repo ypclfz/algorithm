@@ -7,7 +7,8 @@ class SortCommon extends React.Component {
     this.state = {
       value: '',
       result: [],
-      animationLock: false
+      animationLock: false,
+      animationTime: 0.3
     }
   }
 
@@ -50,7 +51,7 @@ class SortCommon extends React.Component {
             animationLock: false  
           })
         }
-        this.props.onAnimation(arrSrc, endAnimation)
+        this.props.onAnimation(arrSrc, endAnimation, this.state.animationTime)
       }  
     }
     

@@ -1,9 +1,16 @@
 import React from 'react'
 import {Input, Button} from 'antd'
 import SortCommon from '../common/SortCommon'
+import Block from '../../common/Block'
 
 class HeapSort extends React.Component {
-  
+  constructor (props) {
+    super(props)
+    this.state = {
+      arr: []
+    }
+  }
+
   heapSort = (arrSrc) => {
     const arr = [...arrSrc]
 
@@ -37,8 +44,58 @@ class HeapSort extends React.Component {
     }
   }
 
+  heapSortAnimation = async (arr, end, animationTime) => {
+    arr = arr.map((number, index) => new Block({number, index, animationTime}))
+    this.setState({arr})
+
+    await this.$tool.delayMethod(1000)    
+  }
+
+  getGroups () {
+    const arr = this.state.arr
+    const groups = []
+    let i = 0
+    let length = 1
+    while (i < arr.length) {
+      groups.push(arr.slice(i, i + length))
+      i += length
+      length *= 2
+    }
+    return groups
+  }
+
   render () {
-    return (<SortCommon title="HeapSort" onSort={this.heapSort}/>)
+
+    const groups = this.getGroups()
+    const ulStyle = {
+      display: 'flex',
+      justifyContent: 'center'
+    }
+    const divBlocks = (group, index, length) => {
+      const width = Math.pow(2, length - index - 1)*40
+      const all = Math.pow(2, index) 
+      const style = {
+        width 
+      }
+      const arr = group.map((item) => {
+        return (
+          <div style={style} key={item.index}>
+            <li className='block' style={item.style}>{item.number}</li>
+          </div>
+        )
+      })
+      if (all > group.length) {
+        arr.push(<div style={{width: (all - group.length)*width}}></div>)
+      }
+      return (<ul className="animation-ul" key={index} style={ulStyle}>{arr}</ul>)
+    }
+    return ( 
+      <SortCommon title="HeapSort" onSort={this.heapSort} onAnimation={this.heapSortAnimation}>
+      {
+        groups.map((group, index) => divBlocks(group, index, groups.length))
+      }
+      </SortCommon>
+    )
   }
 }
 export default HeapSort

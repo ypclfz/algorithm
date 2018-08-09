@@ -34,13 +34,16 @@ export default class Block {
 		this.__inner__.y = 0
 		this.transitionFlag = false
 		this.borderColor = 'black'
+		this.flag = ''
+		this.backgroundColor = ''
 	}
 
 	get style () {
 		return {
       border: `solid 1px ${this.borderColor}`,
-      transition: this.transitionFlag ? `all ${this.animationTime}s` : '',
-      transform: `translate(${this.x}px, ${this.y}px)`
+      transition: this.transitionFlag ? `transform ${this.animationTime}s` : '',
+      transform: this.transitionFlag ? `translate(${this.x}px, ${this.y}px)` : '',
+      backgroundColor: this.backgroundColor
     }
 	}
 }
