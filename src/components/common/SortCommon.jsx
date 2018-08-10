@@ -8,7 +8,7 @@ class SortCommon extends React.Component {
       value: '',
       result: [],
       animationLock: false,
-      animationTime: 0.3
+      animationTime: 0.2
     }
   }
 
