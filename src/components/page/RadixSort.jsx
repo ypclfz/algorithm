@@ -2,9 +2,9 @@ import React from 'react'
 import {Input, Button} from 'antd'
 import SortCommon from '../common/SortCommon'
 
-class RadixSork extends React.Component {
+class RadixSort extends React.Component {
   
-  radixSork = (arrSrc) => {
+  radixSort = (arrSrc) => {
     let arr = [...arrSrc]
 
  		let maxSize = arr.reduce((max, item) => {
@@ -34,7 +34,7 @@ class RadixSork extends React.Component {
   }
 
   render () {
-    return (<SortCommon title="RadixSork" onSort={this.radixSork}/>)
+    return (<SortCommon title="RadixSort" onSort={this.radixSort}/>)
   }
 }
-export default RadixSork
+export default RadixSort

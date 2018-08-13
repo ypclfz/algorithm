@@ -37,7 +37,7 @@ class SortCommon extends React.Component {
     let arrSrc 
     try {
       arrSrc = JSON.parse(this.state.value)
-    }catch (e) {
+    } catch (e) {
       message.warning('输入不符合规范')
       return false
     }
