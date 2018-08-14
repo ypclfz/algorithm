@@ -17,7 +17,7 @@ class CountingSort extends React.Component {
     	order[i] = order[i] + order[i-1]
     }
     let newArr = []
-    let len = arr.len
+    let len = arr.length
     while(len--) {
     	const value = arr[len]
     	newArr[order[value] - 1] = value
@@ -27,7 +27,7 @@ class CountingSort extends React.Component {
   }
 
   render () {
-    return (<SortCommon title="CountingSort" onSort={this.countingSort}/>)
+    return (<SortCommon title="CountingSort" onSort={this.countingSort} timeLock={true} animationLock={true}/>)
   }
 }
 export default CountingSort

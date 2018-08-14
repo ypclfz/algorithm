@@ -1,5 +1,6 @@
 import React from 'react'
 import {Input, Button, Icon, message} from 'antd'
+import { InputNumber } from 'antd';
 
 class SortCommon extends React.Component {
   constructor (props) {
@@ -8,7 +9,7 @@ class SortCommon extends React.Component {
       value: '',
       result: [],
       animationLock: false,
-      animationTime: 0.2
+      animationTime: 0.5
     }
   }
 
@@ -38,7 +39,11 @@ class SortCommon extends React.Component {
     try {
       arrSrc = JSON.parse(this.state.value)
     } catch (e) {
-      message.warning('输入不符合规范')
+      message.warning('JSON输入不符合规范')
+      return false
+    }
+    if (this.state.animationTime === undefined) {
+      message.warning('动画间隔不能为空')
       return false
     }
     if(Array.isArray(arrSrc)) {
@@ -53,6 +58,8 @@ class SortCommon extends React.Component {
         }
         this.props.onAnimation(arrSrc, endAnimation, this.state.animationTime)
       }  
+    } else {
+      message.warning('请确认JSON输入为数组')
     }
     
   }
@@ -69,6 +76,12 @@ class SortCommon extends React.Component {
     })
   }
 
+  onChange1 (val, key) {
+    this.setState({
+      [key]: val
+    })
+  }
+
   render () {
     return (
       <div>
@@ -77,7 +90,8 @@ class SortCommon extends React.Component {
         
           <Input addonAfter={<Icon type="retweet" style={{cursor: 'pointer'}} title="随机生成" onClick={this.handleRandom} />} placeholder="json格式的数字数组" value={this.state.value} onChange={this.onChange}/>          
           <Button onClick={this.handleSort}>开始排序</Button>
-          <Button onClick={this.handleAnimation} disabled={this.state.animationLock}>播放排序动画</Button>
+          <Button onClick={this.handleAnimation} disabled={this.props.animationLock || this.state.animationLock}>播放排序动画</Button>
+          <InputNumber placeholder="动画间隔" value={this.state.animationTime} disabled={this.props.timeLock || this.state.animationLock} min={0.1} max={10} step={0.1} onChange={(val) => {this.onChange1(val, 'animationTime')}} />
           <div>
             <span>排序结果：</span>
             <span>{this.state.result.join(',')}</span>
@@ -90,4 +104,8 @@ class SortCommon extends React.Component {
     )   
   }
 }
+SortCommon.defaultProps = {
+  animationLock: false,
+  timeLock: false
+};
 export default SortCommon

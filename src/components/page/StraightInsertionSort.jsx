@@ -136,7 +136,7 @@ class StraightInsertionSort extends React.Component {
   render () {
     return (
       <div>
-        <SortCommon title="StraightInsertionSort" onSort={this.straightInsertionSort} onAnimation={this.straightInsertionSortAnimation}>
+        <SortCommon title="StraightInsertionSort" onSort={this.straightInsertionSort} onAnimation={this.straightInsertionSortAnimation} timeLock={true}>
           {            
             <ul className="animation-ul">
               {
