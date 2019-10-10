@@ -96,7 +96,7 @@ class SortCommon extends React.Component {
             <span>排序结果：</span>
             <span>{this.state.result.join(',')}</span>
           </div>
-          <div>
+          <div style={{textAlign: 'center'}}>
             {this.props.children}
           </div>
         </div>
