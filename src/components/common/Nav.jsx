@@ -32,6 +32,11 @@ class Nav extends React.Component {
           <Menu.Item key="/radix_sort">基数排序</Menu.Item>
           <Menu.Item key="/counting_sort">计数排序</Menu.Item>
         </SubMenu>
+        <SubMenu title={<span>数据结构</span>}>
+          <Menu.Item key="/queue">队列</Menu.Item>
+          <Menu.Item key="/stack">栈</Menu.Item>
+          <Menu.Item key="/linked_list">链表</Menu.Item>
+        </SubMenu>
       </Menu>
     )
   }

@@ -15,7 +15,7 @@
 	transform: translateX(0);
 }
 .move-enter-active {
-	transform: translateX(40px);
+transform: translateX(40px);
   transition: all 500ms;	
 }
 .move-enter-done {
@@ -23,19 +23,3 @@
 }
 
 /*MergeSort*/
-
-
-.block {
-	display: inline-block;
-	text-align: center; 
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	font-size: 13px;
-}
-
-.animation-ul {
-	padding: 0; 
-	margin: 0; 
-	list-style-type: 'none';
-}

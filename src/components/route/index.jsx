@@ -9,10 +9,13 @@ import StraightSelectSort from '../page/StraightSelectSort'
 import BubbleSort from '../page/BubbleSort'
 import RadixSort from '../page/RadixSort'
 import CountingSort from '../page/CountingSort'
+import Queue from '../page/Queue'
+import Stack from '../page/Stack'
+// import LinkedList from '../page/LinkedList'
 
 class Routes extends React.Component {
-
   render () {
+    // <Route path="/linked_list" component={LinkedList} />
     return (
       <Switch>
         <Route path="/straight_insertion_sort" component={StraightInsertionSort} />
@@ -24,6 +27,9 @@ class Routes extends React.Component {
         <Route path="/bubble_sort" component={BubbleSort} />
         <Route path="/radix_sort" component={RadixSort} />
         <Route path="/counting_sort" component={CountingSort} />
+        <Route path="/queue" component={Queue} />
+        <Route path="/stack" component={Stack} />
+        
       </Switch>
     )
   }

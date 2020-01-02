@@ -52,7 +52,8 @@ class QuickSort extends React.Component {
     return i + 1
   }
 
-  quickSortAnimation = async (arrSrc, end) => {
+  quickSortAnimation = async (arrSrc, end, time) => {
+    animationTime = time
     let arr = arrSrc.map((number, index) => new Block({number, index, animationTime}))
     endAnimation = end
 

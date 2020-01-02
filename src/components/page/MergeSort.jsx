@@ -8,51 +8,51 @@ import Block from '../../common/Block'
 class MergeSort extends React.Component {
   
   constructor (props) {
-  	super(props)
-  	this.state = {
-  		arr: []
-  	}
+    super(props)
+    this.state = {
+      arr: []
+    }
   }
 
   mergeSort = (arrSrc) => {
-  	const arr = [...arrSrc]
+    const arr = [...arrSrc]
 
-  	this.mergeSortRec(arr, 0, arr.length - 1)
+    this.mergeSortRec(arr, 0, arr.length - 1)
 
-  	return arr
+    return arr
   }
 
   // 递归合并
-  mergeSortRec (arr, start, end) {	
-  	if (start < end) {
-  		const median =  Math.floor( (start + end) / 2 )
-	  	this.mergeSortRec(arr, start, median)
-	  	this.mergeSortRec(arr, median + 1, end)
-	  	this.mergeArr(arr, start, end, median)	
-  	}
+  mergeSortRec (arr, start, end) {  
+    if (start < end) {
+      const median =  Math.floor( (start + end) / 2 )
+      this.mergeSortRec(arr, start, median)
+      this.mergeSortRec(arr, median + 1, end)
+      this.mergeArr(arr, start, end, median)  
+    }
   }
 
   // 合并有序数组
   mergeArr (arr, start, end, median) {
-  	const arr1 = arr.slice(start, median + 1)
-  	const arr2 = arr.slice(median + 1, end + 1)
-  	arr1.push(Infinity)
-  	arr2.push(Infinity)
-  	let i = 0, j = 0
-  	for(let k = start; k <= end; k++) {
-  		if(arr1[i] <= arr2[j]) {
-  			arr[k] = arr1[i]
-  			i++
-  		}else {
-  			arr[k] = arr2[j]
-  			j++
-  		}
-  	}
+    const arr1 = arr.slice(start, median + 1)
+    const arr2 = arr.slice(median + 1, end + 1)
+    arr1.push(Infinity)
+    arr2.push(Infinity)
+    let i = 0, j = 0
+    for(let k = start; k <= end; k++) {
+      if(arr1[i] <= arr2[j]) {
+        arr[k] = arr1[i]
+        i++
+      }else {
+        arr[k] = arr2[j]
+        j++
+      }
+    }
   }
 
   mergeSortAnimation = async (arr, end, animationTime) => {
-  	arr = arr.map((number, index) => new Block({number, index, animationTime}))
-  	this.animationTime = animationTime
+    arr = arr.map((number, index) => new Block({number, index, animationTime}))
+    this.animationTime = animationTime
     this.setState({ arr })
     await this.$tool.delayMethod(1000)
 
@@ -123,15 +123,15 @@ class MergeSort extends React.Component {
 
   render () {
     return (
-    	<SortCommon title="MergeSort" onSort={this.mergeSort} onAnimation={this.mergeSortAnimation}>
-	    	<ul className="animation-ul">
+      <SortCommon title="MergeSort" onSort={this.mergeSort} onAnimation={this.mergeSortAnimation}>
+        <ul className="animation-ul">
           { 
             this.state.arr.map((item, index) => {
               return (<li className='block' key={item.index} style={item.style}>{item.number}</li>)
             })
           }
         </ul>
-    	</SortCommon>
+      </SortCommon>
     )
   }
 }

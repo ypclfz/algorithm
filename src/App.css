@@ -1,8 +1,14 @@
 @import '~antd/dist/antd.css';
+
+ {
+
+}
+
 .App {
-  text-align: center;
+  /*text-align: center;*/
   position: relative;
 }
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -14,14 +20,60 @@
   height: 150px;
   padding: 20px;
   color: white;
+  text-align: center;
 }
 
 .App-title {
+  color: #ccc;
   font-size: 1.5em;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.title {
+  text-align: center;
+}
+
+.description {
+  font-size: 14px;
+  text-indent: 28px;
+  word-break: break-all;
+}
+
+.none-ul, .animation-ul {
+  padding: 0; 
+  margin: 0; 
+  list-style-type: 'none';
+}
+
+.block {
+  display: inline-block;
+  text-align: center; 
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  border: #ccc 1px solid;
+  vertical-align: middle;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
+.opera-style {
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+.arrow {
+  display: inline-block;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  transition: all .5s;
 }
 
 @keyframes App-logo-spin {

@@ -37,7 +37,7 @@ class BinarySort extends React.Component {
       }
     }
 
-    return arr
+    return arr;
   }
 
   handleAnimation = async (arr, end, animationTime) => {

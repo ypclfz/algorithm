@@ -5,7 +5,6 @@
 */
 import React from 'react'
 import SortCommon from '../common/SortCommon'
-import '../../css/animation.css'
 import { CSSTransition } from 'react-transition-group'
 
 let endAnimation = null

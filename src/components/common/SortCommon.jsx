@@ -1,6 +1,7 @@
 import React from 'react'
 import {Input, Button, Icon, message} from 'antd'
-import { InputNumber } from 'antd';
+import { InputNumber } from 'antd'
+import '../../css/animation.css'
 
 class SortCommon extends React.Component {
   constructor (props) {
@@ -96,7 +97,7 @@ class SortCommon extends React.Component {
             <span>排序结果：</span>
             <span>{this.state.result.join(',')}</span>
           </div>
-          <div>
+          <div style={{textAlign: 'center'}}>
             {this.props.children}
           </div>
         </div>
